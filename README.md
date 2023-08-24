@@ -15,7 +15,7 @@ LABWORK FOR RISC TOOLCHAIN
    int i, sum=0, n=111;
    for (i=1;i<=n; ++i) {
    sum +=i;
-   }
+   } 
   printf("Sum of numbers from 1 to %d is %d \n",n,sum);
  return 0;
   }
@@ -32,6 +32,11 @@ Using the RISC-V GCC compiler, we compiled the C program. riscv64-unknown-elf-gc
 
 to get dissembled ALP code use: riscv64-unknown-elf-objdump -d p1.o | less
 In order to view the main section, type /main
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/b9202056-49b6-412d-b58f-2c640ff17033)
+
+the byte information increments by 4 bytes,
+number of instructions =1084/4
 
 Spike Simulation and Debug: spike pk p1.o is used to check whether the instructions produced are right to give the correct output.
 spike -d pk p1.c is used for debugging.
@@ -54,7 +59,9 @@ after compiling
 
 
 Application binary interface(ABI)
-
+ABI (application binary interface), as the name says, is an interface, that helps programs access system hardware and services.
+ABI defines how your code is stored inside the library file, so that any program using your library can locate the desired function and execute it.
+Each register has a specific name called ABI name which access the internal registers of internal registers.
 
 Labwork
 Write C code in one file and your assembly code in a separate file. In the assembly file, we declared assembly functions with appropriate signatures that match the calling conventions of your platform.

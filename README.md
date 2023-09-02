@@ -82,27 +82,27 @@ Execution: To execute the object file run the command spike pk p3.o
 
 ## DAY 1 RTL DESIGN USING VERILOG WITH SKY130 TECHNOLOGY
 # **Introduction to open-source simulator iverilog**
--->Simulator
+__Simulator__
    *simulator is a tool used for checking the design
    *RTL design is checked for adherence to the spec by simulating the design
    *Simulator is a tool used for simulating the design(iverilog is the simulator here)
--->Design
+__Design__
    *Design is the actual verilog code or set of verilog codes which has the intended functionality to meet with required specifications
--->Testbench
+__Testbench__
      *Testbench is the setup to apply stimulus(test_vectors) to the design to check it's functionality and match it to spec
--->How Simulator Works?
+__How Simulator Works?__
    *Simulator looks for the change on input signals
    *Upon change to the input the output will be evaluated,no change in input-no change in output
    *Simulator is looking for change in the values of input.
    
    ![WhatsApp Image 2023-09-02 at 16 29 45](https://github.com/pavithra7369/asic/assets/143084423/621d6e08-28d5-4e9e-9b27-99340d98eb39)
 
- -->iverilog based simulation flow
+ __iverilog based simulation flow__
  ![WhatsApp Image 2023-09-02 at 16 29 46](https://github.com/pavithra7369/asic/assets/143084423/5f5a8767-af09-4633-8363-4813dfe20400)
   VCD file-value change dump format, vcd file is used because we are looking for changes in values
   gtkwave-is used for viewing the waveform
   
-  examples with testbenches
+_examples with testbenches_
   ![WhatsApp Image 2023-09-02 at 16 43 05](https://github.com/pavithra7369/asic/assets/143084423/f358224b-06af-4b64-9e21-846920cab8aa)
  // module good_mux (input i0 , input i1 , input sel , output reg y); 
 	always @ (*)
@@ -137,13 +137,13 @@ always #10 i0 = ~i0;
 always #55 i1 = ~i1;
 endmodule
 
-we have stimulus generator,we dont have stimulus observer,we arre directly dumping the vcd file and observing the output.
+**we have stimulus generator,we dont have stimulus observer,we arre directly dumping the vcd file and observing the output.**
 
 ## simulation
---> commands used are
- iverilog filename.v tb_filename.v
-./a.out      #this cwhen executed, this dumps the vcd file
- gtkwave tb_filename.vcd
+** commands used are **
+> iverilog filename.v tb_filename.v
+>./a.out      #this cwhen executed, this dumps the vcd file
+> gtkwave tb_filename.vcd
  
 ![WhatsApp Image 2023-09-02 at 16 47 01](https://github.com/pavithra7369/asic/assets/143084423/c70b5b97-cbee-4720-8392-00adf48a804e)
 
@@ -158,32 +158,32 @@ gvim tb_good_mux.v -o good_mux.v
 
 ## synthesis
   Introduction to yosys
--->Synthesizer
+ **Synthesizer**
   *Tool used for converting the RTL to netlist
   *Yosys is the synthesizer in this course
 
 ![WhatsApp Image 2023-09-02 at 17 16 58](https://github.com/pavithra7369/asic/assets/143084423/85768ab1-2d4d-4f61-aba8-ba40aa572a16)
 
-*read_verilog command is to read the design
-*read_liberty to read .lib files
-*write_verilog is to write netlist file
-*Netlist is representation of design in cells present in .lib
+>read_verilog command is to read the design
+>read_liberty to read .lib files
+>write_verilog is to write netlist file
+>Netlist is representation of design in cells present in .lib
 
--->Verify the synthesis
+**Verify the synthesis**
 
 ![WhatsApp Image 2023-09-02 at 17 21 04](https://github.com/pavithra7369/asic/assets/143084423/d342605e-586e-450b-94fb-5868e3f1c2ac)
 
 *The set of primary inputs/primary outputs will remain same between RTL design and synthesized netlist
 
--->RTL design:
+**RTL design:**
 
 Behavioural representation of required specification
 
--->Synthesis:
+**Synthesis:**
 
  It is RTL to gate level translation,this file is given out as a file called netlist
  
--->.lib
+**.lib**
 
 .lib is a collection of logical modules,there are different flavours of same gate.
 
@@ -193,60 +193,60 @@ ensure no "hold" issues.This collection of logical modules form .lib
 
 ![WhatsApp Image 2023-09-02 at 17 41 52](https://github.com/pavithra7369/asic/assets/143084423/1bab7205-351f-48d9-85ec-84f70c8a9a4e)
 
--->Faster cells vs Slower cell, faster calls require more silicon area and power but they have less delay, slower cells require less silicon area and power but delay is comparitively more. Faster cells have wider transistors when compared to slower cells.
+**-->Faster cells vs Slower cell**, faster calls require more silicon area and power but they have less delay, slower cells require less silicon area and power but delay is comparitively more. Faster cells have wider transistors when compared to slower cells.
 
--->Selection of cell
+**-->Selection of cell**
 We'll need to guide the Synthesizer to choose the flavour of cells that is optimum for implementation of logic circuit.More use of faster cells leads to more power consumption and silicon area and hold time violations may occur. More use of slower cells may make the circuit sluggish and may not meet the required performance.
 So, the guidance offfered to synthesizer is "constraints"
 
 ![WhatsApp Image 2023-09-02 at 17 44 10](https://github.com/pavithra7369/asic/assets/143084423/963b38ca-3b0c-4570-b652-fb0ce33825d8)
 
-The synthesis process,first synthtical check is performed and then design is mapped.
+*The synthesis process,first synthtical check is performed and then design is mapped.*
 
 # Invoking Yosys 
 
-// read_liberty -lib /path to .lib file    
-It reads all the components in the .lib file
+> read_liberty -lib /path to .lib file    
+*It reads all the components in the .lib file*
 
-// read_verilog good_mux.v   
-This will read the desgn verilog file
+> read_verilog good_mux.v   
+*This will read the desgn verilog file*
 
 ![WhatsApp Image 2023-09-02 at 17 51 40](https://github.com/pavithra7369/asic/assets/143084423/b0ce7301-3007-47b8-a480-182030b2df60)
 
-// synth -top good_mux    
-synthsesizes the design
+> synth -top good_mux    
+*synthsesizes the design*
 
 ![WhatsApp Image 2023-09-02 at 17 54 01](https://github.com/pavithra7369/asic/assets/143084423/ebbf93c5-eb31-427d-b99d-60e83b117e17)
 
 ![WhatsApp Image 2023-09-02 at 17 55 29](https://github.com/pavithra7369/asic/assets/143084423/58e64428-4511-4b21-9b31-9fff3e6b96b4)
 
-// abc -liberty /path to .lib file 
-this command generates the netlist file based on .lib file
+> abc -liberty /path to .lib file 
+*this command generates the netlist file based on .lib file*
 
 ![WhatsApp Image 2023-09-02 at 17 58 52](https://github.com/pavithra7369/asic/assets/143084423/52a3ca14-8519-4dcc-bcb7-616dc622a687)
 
-//show 
-to see the synthsized output
+>show 
+*to see the synthsized output*
 
 ![WhatsApp Image 2023-09-02 at 18 00 10](https://github.com/pavithra7369/asic/assets/143084423/01f0240e-3397-41ed-9607-2f30f85aeb41)
 
-The synthesised output
+*The synthesised output*
 
  ![WhatsApp Image 2023-09-02 at 18 07 42](https://github.com/pavithra7369/asic/assets/143084423/787c7a51-cc1c-4f65-82dd-93eaba24766a)
  
-// write_verilog good_mux_netlist.v
-   To write the netlist
+> write_verilog good_mux_netlist.v
+  * To write the netlist*
    
-// !gvim good_mux_netlist.v
-to extract the structue of file
+> !gvim good_mux_netlist.v
+*to extract the structue of file*
 
 ![WhatsApp Image 2023-09-02 at 18 13 01](https://github.com/pavithra7369/asic/assets/143084423/55d90739-f6dc-4967-9a50-068965a5e167)
 
 ![WhatsApp Image 2023-09-02 at 18 25 03](https://github.com/pavithra7369/asic/assets/143084423/0cdec9d7-089a-49f7-904f-a95a78bacfea)
 
-To get the netlist in a simple way switch to commands below
-// write_verilog -noattr good_mux_netlist.v
-// !gvim good_mux_netlist.v
+*To get the netlist in a simple way switch to commands below*
+> write_verilog -noattr good_mux_netlist.v
+ >!gvim good_mux_netlist.v
 
 ![WhatsApp Image 2023-09-02 at 18 27 58](https://github.com/pavithra7369/asic/assets/143084423/2d62b0ed-9192-4699-b355-4301ac24fe3d)
 

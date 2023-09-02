@@ -79,7 +79,7 @@ Execution: To execute the object file run the command spike pk p3.o
 ![image](https://github.com/pavithra7369/asic/assets/143084423/a296774b-3f68-4b6c-a2f0-a8cc4f064c02)
 
 
-##DAY1
+## DAY3
 
 
 

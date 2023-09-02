@@ -1,5 +1,5 @@
 ## PES ASIC CLASS
-# DAY1
+## DAY1
 Basic Definition: An Instruction Set Architecture (ISA) is part of the abstract model of a computer that defines how the CPU is controlled by the software. The ISA acts as an interface between the hardware and the software, specifying both what the processor is capable of doing as well as how it gets done.
 RISC-V is an open-source instruction set architecture used to develop custom processors for a variety of applications, from embedded designs to supercomputers. From Apps to Hardware
 Applications: Applications, also known as software applications or simply apps, are programs or software designed to perform specific tasks or functions for end-users. Examples include word processors, web browsers, and games
@@ -9,7 +9,7 @@ Assembler: An assembler is a program or tool that translates assembly language c
 RTL (Register-Transfer Level): RTL, or Register-Transfer Level, is a level of hardware description language used to model the behavior of digital circuits at a low level of abstraction. It specifies how data moves between registers and how logic operations are performed.
 Hardware: Hardware refers to the physical components of a computer system, including the CPU, memory, storage devices, input/output devices, and other electronic and mechanical components. It is the tangible, physical part of a computer system
 
-LABWORK FOR RISC TOOLCHAIN
+## LABWORK FOR RISC TOOLCHAIN
 1a#Writing C program using leaf header to find sum of integers from1 to 1 to n
  #include<stdio.h>
  int main(){
@@ -80,25 +80,26 @@ Execution: To execute the object file run the command spike pk p3.o
 ![image](https://github.com/pavithra7369/asic/assets/143084423/a296774b-3f68-4b6c-a2f0-a8cc4f064c02)
 
 
-## DAY 1 RTL DESIGN USING VERILOG WITH SKY130 TECHNOLOGY
-# **Introduction to open-source simulator iverilog**
+# DAY 1 RTL DESIGN USING VERILOG WITH SKY130 TECHNOLOGY
+
+## **Introduction to open-source simulator iverilog**
 __Simulator__
-   +simulator is a tool used for checking the design
+   + simulator is a tool used for checking the design
    
-   +RTL design is checked for adherence to the spec by simulating the design
+   + RTL design is checked for adherence to the spec by simulating the design
    
-   +Simulator is a tool used for simulating the design(iverilog is the simulator here)
+   + Simulator is a tool used for simulating the design(iverilog is the simulator here)
    
 __Design__
-   +Design is the actual verilog code or set of verilog codes which has the intended functionality to meet with required specifications
+   + Design is the actual verilog code or set of verilog codes which has the intended functionality to meet with required specifications
    
 __Testbench__
-     +Testbench is the setup to apply stimulus(test_vectors) to the design to check it's functionality and match it to spec
+     + Testbench is the setup to apply stimulus(test_vectors) to the design to check it's functionality and match it to spec
      
 __How Simulator Works?__
-   +Simulator looks for the change on input signals
-   +Upon change to the input the output will be evaluated,no change in input-no change in output
-   +Simulator is looking for change in the values of input.
+   + Simulator looks for the change on input signals
+   + Upon change to the input the output will be evaluated,no change in input-no change in output
+   + Simulator is looking for change in the values of input.
    
    ![WhatsApp Image 2023-09-02 at 16 29 45](https://github.com/pavithra7369/asic/assets/143084423/621d6e08-28d5-4e9e-9b27-99340d98eb39)
 
@@ -110,26 +111,30 @@ __How Simulator Works?__
 _examples with testbenches_
   ![WhatsApp Image 2023-09-02 at 16 43 05](https://github.com/pavithra7369/asic/assets/143084423/f358224b-06af-4b64-9e21-846920cab8aa)
   
-  module good_mux (input i0 , input i1 , input sel , output reg y); 
-	always @ (*)
-	begin
+ 
+    module good_mux (input i0 , input i1 , input sel , output reg y); 
+  
+    always @ (*)
+ 
+     begin
 		if(sel)
 		y <= i1;
 		else 
 		y <= i0;
 	end
       endmodule
+      
 
-timescale 1ns / 1ps
-module tb_good_mux;
-// Inputs
-reg i0,i1,sel;
-// Outputs
-wire y;
+      timescale 1ns / 1ps
+    module tb_good_mux;
+    // Inputs
+    reg i0,i1,sel;
+    // Outputs
+    wire y;
   		// Instantiate the Unit Under Test (UUT), name based instantiation
 	good_mux uut (.sel(sel),.i0(i0),.i1(i1),.y(y));
 	//good_mux uut (sel,i0,i1,y);  //order based instantiation
-initial begin
+    initial begin
 	$dumpfile("tb_good_mux.vcd");
 	$dumpvars(0,tb_good_mux);
 	// Initialize Inputs
@@ -137,11 +142,11 @@ initial begin
 	i0 = 0;
 	i1 = 0;
 	#300 $finish;
-end
-always #75 sel = ~sel;
-always #10 i0 = ~i0;
-always #55 i1 = ~i1;
-endmodule
+     end
+    always #75 sel = ~sel;
+    always #10 i0 = ~i0;
+    always #55 i1 = ~i1;
+    endmodule
 
 **we have stimulus generator,we dont have stimulus observer,we arre directly dumping the vcd file and observing the output.**
 
@@ -167,8 +172,8 @@ gvim tb_good_mux.v -o good_mux.v
 ## synthesis
   Introduction to yosys
  **Synthesizer**
-  +Tool used for converting the RTL to netlist
-  +Yosys is the synthesizer in this course
+  + Tool used for converting the RTL to netlist
+  + Yosys is the synthesizer in this course
 
 ![WhatsApp Image 2023-09-02 at 17 16 58](https://github.com/pavithra7369/asic/assets/143084423/85768ab1-2d4d-4f61-aba8-ba40aa572a16)
 
@@ -181,7 +186,7 @@ gvim tb_good_mux.v -o good_mux.v
 
 ![WhatsApp Image 2023-09-02 at 17 21 04](https://github.com/pavithra7369/asic/assets/143084423/d342605e-586e-450b-94fb-5868e3f1c2ac)
 
-+The set of primary inputs/primary outputs will remain same between RTL design and synthesized netlist
++ The set of primary inputs/primary outputs will remain same between RTL design and synthesized netlist
 
 **RTL design:**
 

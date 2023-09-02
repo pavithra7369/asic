@@ -83,17 +83,22 @@ Execution: To execute the object file run the command spike pk p3.o
 ## DAY 1 RTL DESIGN USING VERILOG WITH SKY130 TECHNOLOGY
 # **Introduction to open-source simulator iverilog**
 __Simulator__
-   *simulator is a tool used for checking the design
-   *RTL design is checked for adherence to the spec by simulating the design
-   *Simulator is a tool used for simulating the design(iverilog is the simulator here)
+   +simulator is a tool used for checking the design
+   
+   +RTL design is checked for adherence to the spec by simulating the design
+   
+   +Simulator is a tool used for simulating the design(iverilog is the simulator here)
+   
 __Design__
-   *Design is the actual verilog code or set of verilog codes which has the intended functionality to meet with required specifications
+   +Design is the actual verilog code or set of verilog codes which has the intended functionality to meet with required specifications
+   
 __Testbench__
-     *Testbench is the setup to apply stimulus(test_vectors) to the design to check it's functionality and match it to spec
+     +Testbench is the setup to apply stimulus(test_vectors) to the design to check it's functionality and match it to spec
+     
 __How Simulator Works?__
-   *Simulator looks for the change on input signals
-   *Upon change to the input the output will be evaluated,no change in input-no change in output
-   *Simulator is looking for change in the values of input.
+   +Simulator looks for the change on input signals
+   +Upon change to the input the output will be evaluated,no change in input-no change in output
+   +Simulator is looking for change in the values of input.
    
    ![WhatsApp Image 2023-09-02 at 16 29 45](https://github.com/pavithra7369/asic/assets/143084423/621d6e08-28d5-4e9e-9b27-99340d98eb39)
 
@@ -104,7 +109,8 @@ __How Simulator Works?__
   
 _examples with testbenches_
   ![WhatsApp Image 2023-09-02 at 16 43 05](https://github.com/pavithra7369/asic/assets/143084423/f358224b-06af-4b64-9e21-846920cab8aa)
- // module good_mux (input i0 , input i1 , input sel , output reg y); 
+  
+  module good_mux (input i0 , input i1 , input sel , output reg y); 
 	always @ (*)
 	begin
 		if(sel)
@@ -140,9 +146,11 @@ endmodule
 **we have stimulus generator,we dont have stimulus observer,we arre directly dumping the vcd file and observing the output.**
 
 ## simulation
-** commands used are **
+**commands used are**
 > iverilog filename.v tb_filename.v
+
 >./a.out      #this cwhen executed, this dumps the vcd file
+
 > gtkwave tb_filename.vcd
  
 ![WhatsApp Image 2023-09-02 at 16 47 01](https://github.com/pavithra7369/asic/assets/143084423/c70b5b97-cbee-4720-8392-00adf48a804e)
@@ -159,8 +167,8 @@ gvim tb_good_mux.v -o good_mux.v
 ## synthesis
   Introduction to yosys
  **Synthesizer**
-  *Tool used for converting the RTL to netlist
-  *Yosys is the synthesizer in this course
+  +Tool used for converting the RTL to netlist
+  +Yosys is the synthesizer in this course
 
 ![WhatsApp Image 2023-09-02 at 17 16 58](https://github.com/pavithra7369/asic/assets/143084423/85768ab1-2d4d-4f61-aba8-ba40aa572a16)
 
@@ -173,7 +181,7 @@ gvim tb_good_mux.v -o good_mux.v
 
 ![WhatsApp Image 2023-09-02 at 17 21 04](https://github.com/pavithra7369/asic/assets/143084423/d342605e-586e-450b-94fb-5868e3f1c2ac)
 
-*The set of primary inputs/primary outputs will remain same between RTL design and synthesized netlist
++The set of primary inputs/primary outputs will remain same between RTL design and synthesized netlist
 
 **RTL design:**
 
@@ -201,7 +209,7 @@ So, the guidance offfered to synthesizer is "constraints"
 
 ![WhatsApp Image 2023-09-02 at 17 44 10](https://github.com/pavithra7369/asic/assets/143084423/963b38ca-3b0c-4570-b652-fb0ce33825d8)
 
-*The synthesis process,first synthtical check is performed and then design is mapped.*
++The synthesis process,first synthtical check is performed and then design is mapped.*
 
 # Invoking Yosys 
 

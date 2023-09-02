@@ -80,26 +80,78 @@ Execution: To execute the object file run the command spike pk p3.o
 ![image](https://github.com/pavithra7369/asic/assets/143084423/a296774b-3f68-4b6c-a2f0-a8cc4f064c02)
 
 
-## DAY3
-.dropdown-link {
-  padding: 5px 30px 5px 12px;
-  border: 1px solid rgba(0,0,0,0.2);
-  display: inline-block;
-  cursor: pointer
-}
+## DAY 1 RTL DESIGN USING VERILOG WITH SKY130 TECHNOLOGY
+# **Introduction to open-source simulator iverilog**
+-->Simulator
+   *simulator is a tool used for checking the design
+   *RTL design is checked for adherence to the spec by simulating the design
+   *Simulator is a tool used for simulating the design(iverilog is the simulator here)
+-->Design
+   *Design is the actual verilog code or set of verilog codes which has the intended functionality to meet with required specifications
+-->Testbench
+     *Testbench is the setup to apply stimulus(test_vectors) to the design to check it's functionality and match it to spec
+-->How Simulator Works?
+   *Simulator looks for the change on input signals
+   *Upon change to the input the output will be evaluated,no change in input-no change in output
+   *Simulator is looking for change in the values of input.
+   
+   ![WhatsApp Image 2023-09-02 at 16 29 45](https://github.com/pavithra7369/asic/assets/143084423/621d6e08-28d5-4e9e-9b27-99340d98eb39)
 
-.dropdown-link:hover {
-  background-color: #f1faff;
-}
+ -->iverilog based simulation flow
+ ![WhatsApp Image 2023-09-02 at 16 29 46](https://github.com/pavithra7369/asic/assets/143084423/5f5a8767-af09-4633-8363-4813dfe20400)
+  VCD file-value change dump format, vcd file is used because we are looking for changes in values
+  gtkwave-is used for viewing the waveform
+  
+  examples with testbenches
+  ![WhatsApp Image 2023-09-02 at 16 43 05](https://github.com/pavithra7369/asic/assets/143084423/f358224b-06af-4b64-9e21-846920cab8aa)
+ // module good_mux (input i0 , input i1 , input sel , output reg y); 
+	always @ (*)
+	begin
+		if(sel)
+		y <= i1;
+		else 
+		y <= i0;
+	end
+endmodule
 
-ul.dropdown-menu li.current {
-  background-color: #eee;
-}
 
-ul.menu.dropdown-menu {
-  position: absolute;
-  margin-top: -1px;
-} ## DAY3
+`timescale 1ns / 1ps
+module tb_good_mux;
+// Inputs
+reg i0,i1,sel;
+// Outputs
+wire y;
+  		// Instantiate the Unit Under Test (UUT), name based instantiation
+	good_mux uut (.sel(sel),.i0(i0),.i1(i1),.y(y));
+	//good_mux uut (sel,i0,i1,y);  //order based instantiation
+initial begin
+	$dumpfile("tb_good_mux.vcd");
+	$dumpvars(0,tb_good_mux);
+	// Initialize Inputs
+	sel = 0;
+	i0 = 0;
+	i1 = 0;
+	#300 $finish;
+end
+always #75 sel = ~sel;
+always #10 i0 = ~i0;
+always #55 i1 = ~i1;
+endmodule
+
+--> commands used are
+``` iverilog filename.v tb_filename.v
+```
+```./a.out      #this cwhen executed, this dumps the vcd file
+```
+``` gtkwave tb_filename.vcd
+```
+![WhatsApp Image 2023-09-02 at 16 47 01](https://github.com/pavithra7369/asic/assets/143084423/c70b5b97-cbee-4720-8392-00adf48a804e)
+![WhatsApp Image 2023-09-02 at 16 47 01](https://github.com/pavithra7369/asic/assets/143084423/551e9ff7-7e4e-4988-aa50-6d93d5e0d9a2)
+
+
+
+
+
 
 
 

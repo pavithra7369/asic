@@ -80,6 +80,58 @@ Execution: To execute the object file run the command spike pk p3.o
 ![image](https://github.com/pavithra7369/asic/assets/143084423/a296774b-3f68-4b6c-a2f0-a8cc4f064c02)
 
 
+
+## Installation
+> git clone https://github.com/YosysHQ/yosys.git
+
+> cd yosys
+
+> sudo apt install make
+
+> sudo apt-get update
+
+> sudo apt-get install build-essential clang bison flex  libreadline-dev gawk tcl-dev libffi-dev git  graphviz xdot pkg-config python3 libboost-system-dev libboost-python-dev libboost-filesystem-dev zlib1g-dev
+
+> make config-gcc
+
+> make
+
+> sudo make install
+
+> sudo apt install gtkwave
+
+![WhatsApp Image 2023-09-02 at 19 12 29](https://github.com/pavithra7369/asic/assets/143084423/fc6ba69b-1112-44da-98b0-c0f24f826f73)
+
++ Yosys installation
+  
+   $ git clone https://github.com/YosysHQ/yosys.git
+  
+   $ cd yosys-master
+  
+   $ sudo apt install make
+  
+   $ sudo apt-get install build-essential clang bison flex \
+    libreadline-dev gawk tcl-dev libffi-dev git \
+    graphviz xdot pkg-config python3 libboost-system-dev \
+    libboost-python-dev libboost-filesystem-dev zlib1g-dev
+  
+  $ make
+  
+  $ sudo make install
+  
+  ![WhatsApp Image 2023-09-02 at 19 17 44](https://github.com/pavithra7369/asic/assets/143084423/d1cb3e7f-4330-45fb-ad21-f2b0aa514ba3)
+
+  + Iverilog installation command
+    > sudo apt-get install iverilog
+
+    ![WhatsApp Image 2023-09-02 at 19 20 27](https://github.com/pavithra7369/asic/assets/143084423/99e68623-0f7f-4062-8efc-bac965a30b80)
+
+  + gtkwave simulator installation command
+    > sudo apt-get install gtkwave
+
+    ![WhatsApp Image 2023-09-02 at 19 22 38](https://github.com/pavithra7369/asic/assets/143084423/0646e0cf-e994-41f1-a483-9f6727a287b9)
+
+
 # DAY 1 RTL DESIGN USING VERILOG WITH SKY130 TECHNOLOGY
 
 ## **Introduction to open-source simulator iverilog**
@@ -263,11 +315,199 @@ So, the guidance offfered to synthesizer is "constraints"
 
 ![WhatsApp Image 2023-09-02 at 18 27 58](https://github.com/pavithra7369/asic/assets/143084423/2d62b0ed-9192-4699-b355-4301ac24fe3d)
 
+## DAY2 Timing libs, hierarchical, flat synthesis, efficient flop coding styles
++ Introduction to timing dot libs
+Command to extract .lib
+> gvim /path
+
+![WhatsApp Image 2023-09-02 at 19 35 04](https://github.com/pavithra7369/asic/assets/143084423/af63bcbd-49eb-4ded-a3f3-e0ffe02a2c0d)
+
+![WhatsApp Image 2023-09-02 at 19 35 04](https://github.com/pavithra7369/asic/assets/143084423/d3f34acf-0bec-4b9f-8156-abf1b1f98544)
+
+ if neede Use :syn off to remove the colour 
+ 
+![WhatsApp Image 2023-09-02 at 19 37 49](https://github.com/pavithra7369/asic/assets/143084423/86e50b01-9f5a-4452-b560-178a2697a85c)
+
++ The first line represents the name of the library
+
++ PVT --> Process Voltage Temperature ,
+  important for design to work . in the above library that is... sky130_fd_sc_hd__tt_025C_1v80
+
++ tt stands for typical process
+
++ 025c tands for temperature
+
++ 1v80stands for voltage
+
+the command :/cell marks the main cells
+
+![WhatsApp Image 2023-09-02 at 20 12 56](https://github.com/pavithra7369/asic/assets/143084423/1b7803b8-2380-418a-99ce-15d7fbbdee40)
 
 
++ what does the library contains?
+here are some features:
+different flavour of different cells and different flavour of same cells.
+leakage_power
+area number
+power port information
+each input pin information
+transition and delay associated with the cell
+timing information etc.
+
+# **Lab hirearchial synthesis and flat synthesis**
+
+     module sub_module2 (input a, input b, output y);
+	assign y = a | b;
+     endmodule
+
+    module sub_module1 (input a, input b, output y);
+	assign y = a&b;
+    endmodule
 
 
+    module multiple_modules (input a, input b, input c , output y);
+    wire net1;
+    sub_module1 u1(.a(a),.b(b),.y(net1));  //net1 = a&b
+    sub_module2 u2(.a(net1),.b(c),.y(y));  //y = net1|c ,ie y = a&b + c;
+    endmodule
 
++ command used for multiple modules are
+  # Hierarchical Synthesis
+> gvim multiple_modules.v
+
+![WhatsApp Image 2023-09-02 at 21 20 24](https://github.com/pavithra7369/asic/assets/143084423/955f7671-b22c-43b2-9e0b-dc3751ad6c55)
+
+![WhatsApp Image 2023-09-02 at 21 19 06](https://github.com/pavithra7369/asic/assets/143084423/1576f0b5-0914-42dd-baba-80b35f8de3b7)
+
+Commands used:
+> yosys --> to invoke yosys
+
+> read_liberty -lib /path
+
+> read_verilog multiple_modules.v
+
+> synth -top multiple_modules
+
+> abc -liberty /path
+
+> show multiple_modules
+
+![WhatsApp Image 2023-09-02 at 21 22 52](https://github.com/pavithra7369/asic/assets/143084423/c452a358-03d4-4019-9b0c-a9a1ad504969)
+
+![WhatsApp Image 2023-09-02 at 21 23 54](https://github.com/pavithra7369/asic/assets/143084423/6c70307d-b199-4116-b4f4-b597b643e8f5)
+
+![WhatsApp Image 2023-09-02 at 21 24 37](https://github.com/pavithra7369/asic/assets/143084423/e9af85dd-680b-47e1-a8f5-bbbdcec9b0d0)
+
+![WhatsApp Image 2023-09-02 at 21 24 56](https://github.com/pavithra7369/asic/assets/143084423/f8072ea0-357e-48c1-abe8-5fdd17bc868f)
+
+![WhatsApp Image 2023-09-02 at 21 27 10](https://github.com/pavithra7369/asic/assets/143084423/d5667545-6418-4d83-87dd-011450778192)
+
+to view the netlist commands used:
+
+> write_verilog -noattr multiple_modules_hier.v
+
+> !gvim multiple_modules_hier.v
+
+![WhatsApp Image 2023-09-02 at 21 31 24](https://github.com/pavithra7369/asic/assets/143084423/db26a7ac-ede1-4e79-953d-82ad20414139)
+
+![WhatsApp Image 2023-09-02 at 21 31 35](https://github.com/pavithra7369/asic/assets/143084423/320d2ad9-3631-44e3-97a0-a9cff70f88ac)
+
+![WhatsApp Image 2023-09-02 at 21 36 21](https://github.com/pavithra7369/asic/assets/143084423/aad97fa8-bbb5-4f07-90fa-e5f4e433ba0e)
+
+![WhatsApp Image 2023-09-02 at 21 56 40](https://github.com/pavithra7369/asic/assets/143084423/b284ba9e-aa50-4dba-825f-9f866f30aa44)
+
+# Flat Synthesis
+
+> flatten
+is the command to write flat netlist
+![WhatsApp Image 2023-09-02 at 21 56 40](https://github.com/pavithra7369/asic/assets/143084423/2f22bb3f-23dd-41e0-9727-f0d9bbda25c8)
+
+![WhatsApp Image 2023-09-02 at 21 31 24](https://github.com/pavithra7369/asic/assets/143084423/416151c6-b2ab-4de7-bcb1-a4427046eebb)
+
+![WhatsApp Image 2023-09-02 at 21 31 35](https://github.com/pavithra7369/asic/assets/143084423/022bef66-4756-405e-bc36-aec074bc7a89)
+
++ the hirearchies of submodule1 and submodule2 are preserved
+
+![WhatsApp Image 2023-09-02 at 21 36 21](https://github.com/pavithra7369/asic/assets/143084423/475aac57-4304-480c-9413-8d759b336673)
+
++ when we flatten a module we see the structure completely
+
+To obtain only sub_module1 :
+invoke yosys
+
+> read_liberty -lib /path
+
+> read_verilog multiple_modules.v
+
+> synth -top <module1_name>
+
+> abc -liberty /path
+
+> show
+![WhatsApp Image 2023-09-02 at 21 43 59](https://github.com/pavithra7369/asic/assets/143084423/5013a767-f40d-4dc3-b6f5-455af757e59f)
+
+![WhatsApp Image 2023-09-02 at 21 44 13](https://github.com/pavithra7369/asic/assets/143084423/af8d9e14-1f8d-4319-9ac4-723c755e36b1)
+
+the sub_module1 is shown below:
+
+![WhatsApp Image 2023-09-02 at 21 44 26](https://github.com/pavithra7369/asic/assets/143084423/2d98b40a-4601-43ee-b070-e6b0c6245076)
+
+->Reasons for using submodules
++ sub module level synthesis is used when we have multiple instance of same module
+
++ divide and conquer
+
+  # **Various flop coding styles and optimization**
+   + flip flops are sequencing elements, they distinguish the current token from the prrevious token or data,without flip flops the next token might catch up with previous token,garbling both. Thus flip flops are used to store the value of glitches.
+   +  flip flops are edge triggered the output of the flop changes only on the edge of the clock,means if the input is glitching the output will be stable,meaning the stable output is given next combinational circuit then the output of the combinational circuit will also be stable.
+
+** How to code the flip flops **
+To initialize the flop ,there are control pins on the flop like reset or set
+
+these reset and set can either be synchronous or asynchronous
+
++ **ASYNCHRONOUS**
+> **asynchronous reset**:
+
+    module dff_asyncres ( input clk ,  input async_reset , input d , output reg q );
+    always @ (posedge clk , posedge async_reset)
+    begin
+	      if(async_reset)
+		    q <= 1'b0;
+	      else	
+		     q <= d;
+    end
+    endmodule
+
+![WhatsApp Image 2023-09-02 at 22 34 46](https://github.com/pavithra7369/asic/assets/143084423/d1b4169a-c9b9-4740-a038-71c13ee2c81a)
+
+![WhatsApp Image 2023-09-02 at 22 41 09](https://github.com/pavithra7369/asic/assets/143084423/857101e2-54a0-4f80-a389-eec10b0c32e9)
+
+![WhatsApp Image 2023-09-02 at 19 35 18](https://github.com/pavithra7369/asic/assets/143084423/46d613fc-8538-4b99-92ce-bb275c89c963)
+
+![WhatsApp Image 2023-09-02 at 22 34 46](https://github.com/pavithra7369/asic/assets/143084423/b15d375a-e52c-48e2-9d99-607598de7daa)
+
+![WhatsApp Image 2023-09-02 at 22 34 45](https://github.com/pavithra7369/asic/assets/143084423/ebad393c-4f54-4ee5-9cce-449104973a01)
+
+ > **asynchronous set:**
+
+    module module dff_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
+         always @ (posedge clk )
+         begin
+	           if (sync_reset)
+		         q <= 1'b0;
+	           else	
+		         q <= d;
+         end
+         endmodule
+
+![WhatsApp Image 2023-09-02 at 22 34 46](https://github.com/pavithra7369/asic/assets/143084423/109cde00-af5c-4593-81f7-198f1efdf654)
+
+  ![WhatsApp Image 2023-09-02 at 22 34 44](https://github.com/pavithra7369/asic/assets/143084423/9b8b8b41-35c3-4200-8166-d8debcb114c7)
+
+![WhatsApp Image 2023-09-02 at 22 34 47](https://github.com/pavithra7369/asic/assets/143084423/cc110b21-5562-4668-aee7-4fa5b80daeab)
+
+![WhatsApp Image 2023-09-02 at 22 34 45](https://github.com/pavithra7369/asic/assets/143084423/0ddcb26f-0b49-4e94-9f2c-344f381f11b8)
 
 
 

@@ -420,6 +420,7 @@ to view the netlist commands used:
 
 > flatten
 is the command to write flat netlist
+
 ![WhatsApp Image 2023-09-02 at 21 56 40](https://github.com/pavithra7369/asic/assets/143084423/2f22bb3f-23dd-41e0-9727-f0d9bbda25c8)
 
 ![WhatsApp Image 2023-09-02 at 21 31 24](https://github.com/pavithra7369/asic/assets/143084423/416151c6-b2ab-4de7-bcb1-a4427046eebb)
@@ -444,6 +445,7 @@ invoke yosys
 > abc -liberty /path
 
 > show
+
 ![WhatsApp Image 2023-09-02 at 21 43 59](https://github.com/pavithra7369/asic/assets/143084423/5013a767-f40d-4dc3-b6f5-455af757e59f)
 
 ![WhatsApp Image 2023-09-02 at 21 44 13](https://github.com/pavithra7369/asic/assets/143084423/af8d9e14-1f8d-4319-9ac4-723c755e36b1)
@@ -458,6 +460,7 @@ the sub_module1 is shown below:
 + divide and conquer
 
   # **Various flop coding styles and optimization**
+  
    + flip flops are sequencing elements, they distinguish the current token from the prrevious token or data,without flip flops the next token might catch up with previous token,garbling both. Thus flip flops are used to store the value of glitches.
    +  flip flops are edge triggered the output of the flop changes only on the edge of the clock,means if the input is glitching the output will be stable,meaning the stable output is given next combinational circuit then the output of the combinational circuit will also be stable.
 
@@ -468,6 +471,7 @@ these reset and set can either be synchronous or asynchronous
 
 + **ASYNCHRONOUS**
 > **asynchronous reset**:
+ _module dff_asyncres_
 
     module dff_asyncres ( input clk ,  input async_reset , input d , output reg q );
     always @ (posedge clk , posedge async_reset)
@@ -479,17 +483,16 @@ these reset and set can either be synchronous or asynchronous
     end
     endmodule
 
-![WhatsApp Image 2023-09-02 at 22 34 46](https://github.com/pavithra7369/asic/assets/143084423/d1b4169a-c9b9-4740-a038-71c13ee2c81a)
+![WhatsApp Image 2023-09-03 at 08 15 19](https://github.com/pavithra7369/asic/assets/143084423/fbf5252b-73b3-4e8b-b5eb-e5790c123b18)
 
-![WhatsApp Image 2023-09-02 at 22 41 09](https://github.com/pavithra7369/asic/assets/143084423/857101e2-54a0-4f80-a389-eec10b0c32e9)
+![WhatsApp Image 2023-09-03 at 08 11 56](https://github.com/pavithra7369/asic/assets/143084423/3817902f-02c4-47a3-b236-2e3752a0e41b)
 
 ![WhatsApp Image 2023-09-02 at 19 35 18](https://github.com/pavithra7369/asic/assets/143084423/46d613fc-8538-4b99-92ce-bb275c89c963)
-
-![WhatsApp Image 2023-09-02 at 22 34 46](https://github.com/pavithra7369/asic/assets/143084423/b15d375a-e52c-48e2-9d99-607598de7daa)
 
 ![WhatsApp Image 2023-09-02 at 22 34 45](https://github.com/pavithra7369/asic/assets/143084423/ebad393c-4f54-4ee5-9cce-449104973a01)
 
  > **asynchronous set:**
+ _module dff_asyn_set_
 
     module module dff_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
          always @ (posedge clk )
@@ -509,25 +512,495 @@ these reset and set can either be synchronous or asynchronous
 
 ![WhatsApp Image 2023-09-02 at 22 34 45](https://github.com/pavithra7369/asic/assets/143084423/0ddcb26f-0b49-4e94-9f2c-344f381f11b8)
 
++ **Synchronous**
+  > **Synchronous reset*
+  _module dff_syncres_
+   
+      module dff_syncres ( input clk , input async_reset , input sync_reset , input d , output reg q );
+         always @ (posedge clk )
+         begin
+	    if (sync_reset)
+		  q <= 1'b0;
+	    else	
+		  q <= d;
+          end
+      endmodule
+
+![WhatsApp Image 2023-09-03 at 08 26 36](https://github.com/pavithra7369/asic/assets/143084423/9c40f5a7-8a11-47f6-ba27-d0deb084b14f)
+
+![WhatsApp Image 2023-09-03 at 08 24 13](https://github.com/pavithra7369/asic/assets/143084423/0ae75cc3-c973-43ec-ab38-7b2b01170bf8)
+
+![WhatsApp Image 2023-09-02 at 15 04 36](https://github.com/pavithra7369/asic/assets/143084423/8a25a483-a9dc-43df-a6b1-8fbf0f3ea6c1)
+
+  ![WhatsApp Image 2023-09-02 at 15 04 36](https://github.com/pavithra7369/asic/assets/143084423/37f25efe-0b73-49b4-8b74-95d3e5a19ec8)
+
++ **module mul2**
+
+      module mul2 (input [2:0] a, output [3:0] y);
+      assign y = a * 2;
+      endmodule
+
+  ![WhatsApp Image 2023-09-03 at 08 38 11](https://github.com/pavithra7369/asic/assets/143084423/3dfd84a5-1a96-4c3f-b350-fe97122beadc)
+
+![WhatsApp Image 2023-09-03 at 08 38 10](https://github.com/pavithra7369/asic/assets/143084423/94f44513-422b-4911-a373-09ade64fd2ad)
+
+![WhatsApp Image 2023-09-03 at 08 38 07](https://github.com/pavithra7369/asic/assets/143084423/22338f65-18ff-4ddc-ae4d-2eaf7808d450)
+
+![WhatsApp Image 2023-09-03 at 08 38 10](https://github.com/pavithra7369/asic/assets/143084423/235239e4-0898-4ae1-b13f-cf62105888e0)
+
+  ![WhatsApp Image 2023-09-03 at 08 38 07](https://github.com/pavithra7369/asic/assets/143084423/83d9eb13-e747-44f8-9416-253e6fc9b613)
+
+![WhatsApp Image 2023-09-03 at 08 38 12](https://github.com/pavithra7369/asic/assets/143084423/c954b288-fa48-42e4-afde-30e8eb5ced68)
+
+![WhatsApp Image 2023-09-03 at 08 38 10](https://github.com/pavithra7369/asic/assets/143084423/3682e3ec-6924-444e-ac21-cef55a2dc33e)
+
++ **special case**
+  in this case the realtion is  a*9=y
+  
+![WhatsApp Image 2023-09-03 at 08 38 08](https://github.com/pavithra7369/asic/assets/143084423/30b32cb9-d7b8-4f1b-a5df-1a639fc8f111)
+
+![WhatsApp Image 2023-09-03 at 08 38 09](https://github.com/pavithra7369/asic/assets/143084423/99962e9e-9f36-4022-a178-0daad2dfc057)
+
+![WhatsApp Image 2023-09-03 at 08 38 09](https://github.com/pavithra7369/asic/assets/143084423/93279214-b534-4d43-8d47-63898623731e)
+
+![WhatsApp Image 2023-09-03 at 08 38 09](https://github.com/pavithra7369/asic/assets/143084423/6d4dc4d2-b0ab-4990-a43c-1c94420e0886)
+
+![WhatsApp Image 2023-09-03 at 08 38 12](https://github.com/pavithra7369/asic/assets/143084423/fc723b4b-71dd-46ed-a758-857b88e7f477)
+
+## Day3 Combinational and sequential optimizations
+
+ **Introduction to logic optimizations**
+ 
+ > **Combinational logic optimization**
+   > squeezing the logic to get most optimized logic-->area and power savings
+   > constant propagation --> direct optimization
+      > example:-
+    ![WhatsApp Image 2023-09-03 at 09 05 19](https://github.com/pavithra7369/asic/assets/143084423/b2c845aa-04de-44d1-91cb-044f4d655201)
+           In the above example if A is 0, we can effectively write th eentire logic circuit as inverter.This will directly reduce the number of 
+           transistors required as  Y=(AB+C)' requires 8 transistors and a inverter circuit requires 2 MOS transistors, thus consuming less area and less 
+           power.
+   > boolean logic optimization --> using K-map
+      > example:- 
+   ![image](https://github.com/pavithra7369/asic/assets/143084423/076abf30-bf0e-4b72-b84d-94f863f356cb)
+    As seen in the above example a boolean logic can be reduced, and thus the reduced equation requires less MOS transistors and less area and power 
+    comparitively.
+
+ > **Sequential logic optimizations**
+   >  sequential constant propogation
+       > example:-
+        ![image](https://github.com/pavithra7369/asic/assets/143084423/79ad8b33-2f01-4d19-8af1-48c4e4e46b7b)
+        in the above example, Y=1 irrespective of clock,reset,Q,A.
+       > example:-
+           ![image](https://github.com/pavithra7369/asic/assets/143084423/049c3feb-1aa9-4eed-83ea-6ad97eeb6fae)
+         every flop with D input is not a sequential constant ,for clock to become sequential constant Q pin should always take constabt value.
+    
+
+   > Advanced optimization
+     > state optimization - optimization of unused states
+     > retiming -technique to improve performance of logic circuit
+     > sequential logic cloning (floor plan Aware synthesis) - cloning is done when we are doing physical aware synthesis
+
+**LAB- combinational logic optimizations**
+command to do the optimizations is opt_clean -purge
+1) opt_check
+
+       module opt_check (input a , input b , output y);
+       assign y = a?b:0;
+       endmodule
+   
+![image](https://github.com/pavithra7369/asic/assets/143084423/913d45d0-faa7-456b-95b5-0473ca8a4738)
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/691c297a-44a0-4fcc-a2ce-5e7e0220dd44)
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/4ff3c139-73f5-44ab-a29d-5b3f239e45c5)
+
+2)opt_check2
+     
+    module opt_check2 (input a , input b , output y);
+     assign y = a?1:b;
+    endmodule
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/83ebc849-703f-4723-94b6-8a0c6bb678bf)
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/09760d21-c3ff-4137-a742-41f7f74153d0)
+
+ 3)opt_check3
+ 
+ ![WhatsApp Image 2023-09-03 at 11 34 52](https://github.com/pavithra7369/asic/assets/143084423/faba49c7-9b8f-46fe-848c-300eecf25fd8)
+
+ ![WhatsApp Image 2023-09-03 at 11 36 59](https://github.com/pavithra7369/asic/assets/143084423/49b9f218-bb95-4b78-8631-92743c365c0a)
+
+![WhatsApp Image 2023-09-03 at 11 38 09](https://github.com/pavithra7369/asic/assets/143084423/baed4345-4d79-4db4-80e1-c88aea63c2c3)
+
+4)opt_check4
+
+    module opt_check4 (input a , input b , input c , output y);
+        assign y = a?(b?(a & c ):c):(!c);
+    endmodule
+![WhatsApp Image 2023-09-03 at 11 44 59](https://github.com/pavithra7369/asic/assets/143084423/0a5e5aec-ac76-478a-af0d-ce106174e8fd)
+
+   ![WhatsApp Image 2023-09-03 at 11 46 05](https://github.com/pavithra7369/asic/assets/143084423/596be5b5-b3a2-475d-ac90-acd8d960fb2e)
+ 
+![WhatsApp Image 2023-09-03 at 11 46 38](https://github.com/pavithra7369/asic/assets/143084423/5175d944-224b-4d42-bc85-23122880e0e6)
+
+5)multiple_modules_opt
+
+        module sub_module1(input a , input b , output y);
+               assign y = a & b;
+        endmodule
+
+        module sub_module2(input a , input b , output y);
+         assign y = a^b;
+        endmodule
+
+        module multiple_module_opt(input a , input b , input c , input d , output y);
+        wire n1,n2,n3;
+        sub_module1 U1 (.a(a) , .b(1'b1) , .y(n1));
+        sub_module2 U2 (.a(n1), .b(1'b0) , .y(n2));
+        sub_module2 U3 (.a(b), .b(d) , .y(n3));
+
+        assign y = c | (b & n1); 
+        endmodule
+![image](https://github.com/pavithra7369/asic/assets/143084423/fb6b5007-7331-4525-9a0f-8c3d21ff134c)
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/705cc412-e1d0-4f0b-a4be-94ad27f720f1)
+
+synthseis after command flatten
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/145b43a7-14d3-4d36-8ef8-1d93722339e9)
 
 
+  6)multiple_module_opt2
+
+                      module sub_module(input a , input b , output y);
+ 	                     assign y = a & b;
+                      endmodule
+ 
+                      module multiple_module_opt2(input a , input b , input c , input d , output y);
+ 	                    wire n1,n2,n3;
+ 	                    sub_module U1 (.a(a) , .b(1'b0) , .y(n1));
+ 	                    sub_module U2 (.a(b), .b(c) , .y(n2));
+ 	                    sub_module U3 (.a(n2), .b(d) , .y(n3));
+ 	                    sub_module U4 (.a(n3), .b(n1) , .y(y));
+                      endmodule
 
 
+![image](https://github.com/pavithra7369/asic/assets/143084423/3dd84fa7-8dd4-4ee4-909d-34fbb9514110)
+
+synthesis after command flatten
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/29c59d52-4dae-47a6-8f78-a35b2dd41102)
+
+     
+   **LAB-sequential logic optimization**
+   1)dff_const1
+    Files are present in
+    > ls dff*const
+
+ ![WhatsApp Image 2023-09-03 at 10 20 01](https://github.com/pavithra7369/asic/assets/143084423/3929f6c1-6410-4153-b3c1-29b47b558c1c)
+
+ ![WhatsApp Image 2023-09-03 at 10 18 48](https://github.com/pavithra7369/asic/assets/143084423/3eb60013-3e7e-4b7b-b1f3-45f03ef4b263)
+ 
+![WhatsApp Image 2023-09-03 at 10 33 37](https://github.com/pavithra7369/asic/assets/143084423/6fc44c65-e9f8-41d1-a009-703db81738fa)
+
+   ![WhatsApp Image 2023-09-03 at 10 28 12](https://github.com/pavithra7369/asic/assets/143084423/772b267f-7f78-4525-8d4a-1564e5ef82eb)
+ 
+![WhatsApp Image 2023-09-03 at 10 29 57](https://github.com/pavithra7369/asic/assets/143084423/8fb9e666-1a9f-4bed-b3ae-e65780315ccb)
+
+2)dff_const2
+        
+    module dff_const2(input clk, input reset, output reg q);
+ 	              always @(posedge clk, posedge reset)
+ 	              begin
+ 		         if(reset)
+ 			         q <= 1'b1;
+ 		         else
+ 			         q <= 1'b1;
+ 	               end
+                endmodule
+![WhatsApp Image 2023-09-03 at 10 38 47](https://github.com/pavithra7369/asic/assets/143084423/a99c6409-f870-49be-85c1-f26cd19c2b58)
+
+![WhatsApp Image 2023-09-03 at 10 38 09](https://github.com/pavithra7369/asic/assets/143084423/46fd81d5-a295-477c-82ee-e615e448dd8a)
+
+![WhatsApp Image 2023-09-03 at 10 35 03](https://github.com/pavithra7369/asic/assets/143084423/f2b0ccfc-68b4-4479-8b9c-4a0456a65573)
+
+![WhatsApp Image 2023-09-03 at 10 41 18](https://github.com/pavithra7369/asic/assets/143084423/6fec596d-2071-47c0-a93b-94e5bf25d1c7)
+
+![WhatsApp Image 2023-09-03 at 10 42 27](https://github.com/pavithra7369/asic/assets/143084423/377a97bc-2061-41b8-b732-0f3ed7aa8fb1)
+
+3)dff_const3
+
+    module dff_const3(input clk, input reset, output reg q);
+ 	reg q1;
+ 
+ 	always @(posedge clk, posedge reset)
+ 	begin
+ 		if(reset)
+ 		begin
+ 			q <= 1'b1;
+ 			q1 <= 1'b0;
+ 		end
+ 		else
+ 		begin
+ 			q1 <= 1'b1;
+ 			q <= q1;
+ 		end
+ 	end
+ 	endmodule
+
+  ![WhatsApp Image 2023-09-03 at 11 00 52](https://github.com/pavithra7369/asic/assets/143084423/a44cde51-120f-40d0-96c8-b9c19e49f57f)
+
+![WhatsApp Image 2023-09-03 at 11 04 30](https://github.com/pavithra7369/asic/assets/143084423/954687f0-6cc2-400f-8b5a-21931ce250ed)
+
+![WhatsApp Image 2023-09-03 at 11 05 19](https://github.com/pavithra7369/asic/assets/143084423/44e7dae7-70d2-4a47-b9bb-fcc9afa2562d)
+
+4)dff_const4
+        
+	module dff_const4(input clk, input reset, output reg q); reg q1;
+
+ 	always @(posedge clk, posedge reset)
+ 	begin
+ 		if(reset)
+ 		begin
+ 			q <= 1'b1;
+ 			q1 <= 1'b1;
+ 		end
+ 	else
+ 		begin
+ 			q1 <= 1'b1;
+ 			q <= q1;
+ 		end
+ 	end
+ 	endmodule
+![WhatsApp Image 2023-09-03 at 11 10 04](https://github.com/pavithra7369/asic/assets/143084423/9840e1b3-5cee-470b-86de-026fb17e05a9)
+
+![WhatsApp Image 2023-09-03 at 11 09 34](https://github.com/pavithra7369/asic/assets/143084423/8aaeaa50-c64e-4db7-b5f3-f87184b95d01)
+
+![WhatsApp Image 2023-09-03 at 11 11 37](https://github.com/pavithra7369/asic/assets/143084423/e220a9d3-52d7-4c90-890b-e9b1c5496a86)
+
+![WhatsApp Image 2023-09-03 at 11 12 11](https://github.com/pavithra7369/asic/assets/143084423/5986b0e1-1495-4bdd-8fbe-50077027d01e)
+
+5)dff_const5
+
+     module dff_const5(input clk, input reset, output reg q);
+     reg q1;
+    always @(posedge clk, posedge reset) 
+    begin
+    if(reset) begin q <= 1'b0; q1 <= 1'b0; 
+    end 
+    else 
+    begin q1 <= 1'b1; q <= q1; 
+    end
+    end endmodule
+
+![WhatsApp Image 2023-09-03 at 11 17 56](https://github.com/pavithra7369/asic/assets/143084423/f941d0be-6006-4374-bba7-077d72d49b8e)
+
+![WhatsApp Image 2023-09-03 at 11 17 23](https://github.com/pavithra7369/asic/assets/143084423/a087a973-d4bb-4c26-a6fc-5142549493d9)
+
+![WhatsApp Image 2023-09-03 at 11 19 10](https://github.com/pavithra7369/asic/assets/143084423/3de66b4e-f0ee-4b4b-911c-03176d5fe03d)
+
+![WhatsApp Image 2023-09-03 at 11 20 26](https://github.com/pavithra7369/asic/assets/143084423/3fd6986e-e5a6-4bc4-9a74-2f47c279f3d3)
+
+**Sequential optimizations for unused outputs**
+1)counter_opt
+
+ 		module counter_opt (input clk , input reset , output q);
+ 		reg [2:0] count;
+ 		assign q = count[0];
+ 		always @(posedge clk ,posedge reset)
+ 		begin
+ 			if(reset)
+ 				count <= 3'b000;
+ 			else
+ 				count <= count + 1;
+ 		end
+ 		endmodule
+
+   ![WhatsApp Image 2023-09-03 at 12 34 15](https://github.com/pavithra7369/asic/assets/143084423/55bb3c3d-aadf-4f89-ae8e-46d96135ff8f)
+
+![WhatsApp Image 2023-09-03 at 12 33 24](https://github.com/pavithra7369/asic/assets/143084423/ddb0fe79-77a7-47f0-abd6-763966b44ea6)
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/50ad19a1-ac36-45c5-9249-22c1d5be4a8e)
+
+![WhatsApp Image 2023-09-03 at 12 37 59](https://github.com/pavithra7369/asic/assets/143084423/1dbd3b08-a1a9-4a7e-83cf-20d173069e77)
+
+![WhatsApp Image 2023-09-03 at 12 39 24](https://github.com/pavithra7369/asic/assets/143084423/dee2572d-8e38-439f-8053-ba0456a0a6b7)
 
 
+2)module counter_opt2
+
+ 			module counter_opt (input clk , input reset , output q);
+ 					reg [2:0] count;
+ 					assign q = {count[2:0]==3'b100};
+ 					always @(posedge clk ,posedge reset)
+ 					begin
+ 					if(reset)
+ 						count <= 3'b000;
+ 					else
+ 						count <= count + 1;
+ 					end
+ 			endmodule
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/474e4c19-6e2c-4b82-9cf1-71370af00c71)
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/e4e9bfe1-077b-425f-889c-7828a9aba519)
+
+## Day-4-GLS,blocking vs non-blocking and Synthesis-Simulation mismatch
+
+**GLS, Synthesis-Simulation mismatch and Blocking, Non-blocking statements**
+
++  What is GLS?
+
+  Running the test bench with netlist as design under test
+  netlist is logically same as RTL code,input and output in netlist and RTL code are same therefore nerlist will fit in the testbench
 
 
++ why GLS?
+
+  verify the logical correctness of gesign after synthesis
+  Ensuring the timing of the design is met, for this GLS need to be run with delay annotation.
+
++  GLS using IVERILOG
+
+![image](https://github.com/pavithra7369/asic/assets/143084423/3cbf6dd3-50c5-4f10-9057-49f7a2293e53)
+
+> The design in the above block contains netlist,it has standard cells, but these standarrd cell's meaning should be given to the tool, so we give gate level verilog modules.
+> we validate the functionality of netlist, for synthesis and simulation mismatches.
+
++ Synthesis Ans Simulation Mismatch
+  
+  missing sensitivity list
+  blocking vs Non blocking Assignments
+  Non standard verilog code
+Example:
+
+	  module mux(
+	  input i0,input i1,input sel,ouput reg y);
+       always@(sel)
+	  begin
+	  if(sel)
+	       y=i1;
+	  else
+	       y=i0;
+	  end 
+	  endmodule
+ +  simulator looks for change in input only then there is change in input
++ Blocking and non blocking statements
+ > Blocking (=)
+   + executes the statements in the order it is written
+   + so the first statement is evaluated beforee the second statement
 
 
+>  Non-blocking (<=)
+   + executes parallely .order doesnot matches
+   + executes all the RHS when always block is entered and assigns to LHS.
 
 
++ Caveats with Blocking Statements
+//In this case q=q0 and then q0=d
+ 
+      module code (input clk,input reset,input d,output regd);
+      reg q0;
+      always@(posedge clk,posedge reset)
+      begin
+       if(reset)
+        begin q0=1'b0; q=1'b0;
+       end
+      else 
+      begin
+      q=q0
+      q0=d;
+      end 
+      endmodule
+//In this case the order is changed which leads to wrong output, This is where synthesis mismatch occurs
+     
+	 module code (input clk,input reset,input d,output regd);
+	  reg q0;
+	  always@(posedge clk,posedge reset)
+	  begin
+	  if(reset)
+	  begin
+	   q0=1'b0;
+	   q=1'b0;
+	  end
+	  else
+	  begin
+	   q0=d;
+	   q=q0;
+	  end 
+	  endmodule
+   
+  **Labs-GLS and Synthesis-Simulation Mismatch**
+
+    module ternary_operator_mux (input i0 , input i1 , input sel , output y);
+		assign y = sel?i1:i0;
+	endmodule
+
+ ![WhatsApp Image 2023-09-03 at 13 59 30](https://github.com/pavithra7369/asic/assets/143084423/b0b027a7-0d3d-4180-9310-de9aa2d9ad93)
+
+  ![WhatsApp Image 2023-09-03 at 13 58 51](https://github.com/pavithra7369/asic/assets/143084423/024efa71-a572-4eec-ae99-cf8eabc01f73)
+
+![WhatsApp Image 2023-09-03 at 14 01 27](https://github.com/pavithra7369/asic/assets/143084423/bfb8448b-a5f1-4506-ae20-b44cd1e6323a)
+
+![WhatsApp Image 2023-09-03 at 14 01 00](https://github.com/pavithra7369/asic/assets/143084423/d817c9e7-c46f-4f40-b5e1-781cf76bd704)
+
++ Netlist simulation
+  
+ ![WhatsApp Image 2023-09-03 at 14 13 27](https://github.com/pavithra7369/asic/assets/143084423/f090cb3e-feb2-45d0-bb68-31c7e47038fe)
+
+![WhatsApp Image 2023-09-03 at 14 14 03](https://github.com/pavithra7369/asic/assets/143084423/a3d80f1b-b503-4222-8c31-59cdd3767585)
+
+Example2: this is going show the simulation synthesis mismatch
 
 
+	module bad_mux (input i0 , input i1 , input sel , output reg y);
+		always @ (sel)
+		begin
+			if(sel)
+				y <= i1;
+			else 
+				y <= i0;
+		end
+	endmodule
 
+ ![WhatsApp Image 2023-09-03 at 14 18 55](https://github.com/pavithra7369/asic/assets/143084423/4ff06f77-cf12-453e-8451-08d80ab2e94e)
 
+![WhatsApp Image 2023-09-03 at 14 18 29](https://github.com/pavithra7369/asic/assets/143084423/4e2b6e04-e222-40c2-a15c-c9ae261305aa)
 
+![WhatsApp Image 2023-09-03 at 14 20 41](https://github.com/pavithra7369/asic/assets/143084423/2ec21fe3-1580-4039-beab-3b0760092233)
 
+![WhatsApp Image 2023-09-03 at 14 21 16](https://github.com/pavithra7369/asic/assets/143084423/ebe573e3-1714-4412-806a-17310c08ccb2)
 
+In the below picture, we can see that, sel=0, so the output y=i0, and i0 in this case is 1 but we are getting output where y=0.This is due to synthesis simulation mismatch.
 
+![WhatsApp Image 2023-09-03 at 14 27 56](https://github.com/pavithra7369/asic/assets/143084423/ec31f971-30c9-46ae-aebc-7b531ec160e4)
+
+**Lab-GLS and Synthesis-Simulation Mismatch for blocking statement**
+
+example1
+
+    module blocking_caveat (input a , input b , input c, output reg d);
+    reg x; 
+    always @ (*)
+    begin d = x & c;
+    x = a | b; 
+    end
+    endmodule
+    
+simulation
+
+ ![WhatsApp Image 2023-09-03 at 14 35 30](https://github.com/pavithra7369/asic/assets/143084423/f125c12f-0139-4ec6-b6e1-2690bd1c37c9)
+   
+![WhatsApp Image 2023-09-03 at 14 36 36](https://github.com/pavithra7369/asic/assets/143084423/53291e85-74ee-4d9e-aaa8-9892dadec4cc)
+
+synthesis
+
+![WhatsApp Image 2023-09-03 at 14 42 18](https://github.com/pavithra7369/asic/assets/143084423/cbf6ce59-dfd8-47a4-9cf3-32e634b90867)
+
+![WhatsApp Image 2023-09-03 at 14 42 51](https://github.com/pavithra7369/asic/assets/143084423/fef9d970-6da6-4c88-a485-87948408e600)
+
+In the below picture we can see that when a is low b is low the ouput is low,because it is taking instantenous value, this is called synthesis mismatch due to blocking statement(=)
+
+![WhatsApp Image 2023-09-03 at 14 40 35](https://github.com/pavithra7369/asic/assets/143084423/a514d93b-3abc-4049-981a-6c13adbc83a1)
 
 

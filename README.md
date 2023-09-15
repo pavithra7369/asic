@@ -1,22 +1,30 @@
 ## PES ASIC CLASS
-## DAY1
-
-Basic Definition: An Instruction Set Architecture (ISA) is part of the abstract model of a computer that defines how the CPU is controlled by the software. The ISA acts as an interface between the hardware and the software, specifying both what the processor is capable of doing as well as how it gets done.
-RISC-V is an open-source instruction set architecture used to develop custom processors for a variety of applications, from embedded designs to supercomputers. From Apps to Hardware
-Applications: Applications, also known as software applications or simply apps, are programs or software designed to perform specific tasks or functions for end-users. Examples include word processors, web browsers, and games
-System Software: System software refers to a collection of programs and utilities that manage and control a computer system's hardware and provide services to other software applications. It includes the operating system, device drivers, and system utilities.
-Compiler: A compiler is a software tool that translates high-level programming code (source code) written by humans into machine code or intermediate code that can be executed directly by a computer's hardware or by a virtual machine.
-Assembler: An assembler is a program or tool that translates assembly language code, a low-level human-readable representation of machine code instructions, into machine code that can be executed by a computer's CPU.
-RTL (Register-Transfer Level): RTL, or Register-Transfer Level, is a level of hardware description language used to model the behavior of digital circuits at a low level of abstraction. It specifies how data moves between registers and how logic operations are performed.
-Hardware: Hardware refers to the physical components of a computer system, including the CPU, memory, storage devices, input/output devices, and other electronic and mechanical components. It is the tangible, physical part of a computer system
-
 </details>
 <details>
 	
-<summary> Lab for RISC tool chain </summary>
+<summary> WEEK1  </summary>
 
- LABWORK FOR RISC TOOLCHAIN
-1a#Writing C program using leaf header to find sum of integers from1 to 1 to n
+# Basic Definition:
+An Instruction Set Architecture (ISA) is part of the abstract model of a computer that defines how the CPU is controlled by the software. The ISA acts as an interface between the hardware and the software, specifying both what the processor is capable of doing as well as how it gets done.
+RISC-V is an open-source instruction set architecture used to develop custom processors for a variety of applications, from embedded designs to supercomputers. From Apps to Hardware
+# Applications: 
+Applications, also known as software applications or simply apps, are programs or software designed to perform specific tasks or functions for end-users. Examples include word processors, web browsers, and games
+# System Software: 
+System software refers to a collection of programs and utilities that manage and control a computer system's hardware and provide services to other software applications. It includes the operating system, device drivers, and system utilities.
+# Compiler:
+A compiler is a software tool that translates high-level programming code (source code) written by humans into machine code or intermediate code that can be executed directly by a computer's hardware or by a virtual machine.
+# Assembler: 
+An assembler is a program or tool that translates assembly language code, a low-level human-readable representation of machine code instructions, into machine code that can be executed by a computer's CPU.
+
+# RTL (Register-Transfer Level): 
+RTL, or Register-Transfer Level, is a level of hardware description language used to model the behavior of digital circuits at a low level of abstraction. It specifies how data moves between registers and how logic operations are performed.
+Hardware: Hardware refers to the physical components of a computer system, including the CPU, memory, storage devices, input/output devices, and other electronic and mechanical components. It is the tangible, physical part of a computer system
+
+
+
+
+#  LABWORK FOR RISC TOOLCHAIN
+1a #Writing C program using leaf header to find sum of integers from1 to 1 to n
  #include<stdio.h>
  int main(){
    int i, sum=0, n=111;
@@ -65,7 +73,7 @@ after compiling
 ![image](https://github.com/pavithra7369/asic/assets/143084423/ca7c3286-7a23-4de3-b32c-e20328e58f13)
 
 
-Application binary interface(ABI)
+# Application binary interface(ABI)
 ABI (application binary interface), as the name says, is an interface, that helps programs access system hardware and services.
 ABI defines how your code is stored inside the library file, so that any program using your library can locate the desired function and execute it.
 Each register has a specific name called ABI name which access the internal registers of internal registers.
@@ -87,9 +95,9 @@ Execution: To execute the object file run the command spike pk p3.o
 
 </details>
 <details>
-<summary>	WEEK 2 DAY1  </summary>
+<summary>	WEEK 2 DAY 1:RTL DESIGN USING VERILOG WITH SKY130 TECHNOLOGY </summary>
 
-## Installation
+# Installation
 > git clone https://github.com/YosysHQ/yosys.git
 
 > cd yosys
@@ -140,7 +148,6 @@ Execution: To execute the object file run the command spike pk p3.o
     ![WhatsApp Image 2023-09-02 at 19 22 38](https://github.com/pavithra7369/asic/assets/143084423/0646e0cf-e994-41f1-a483-9f6727a287b9)
 
 
-# DAY 1 RTL DESIGN USING VERILOG WITH SKY130 TECHNOLOGY
 
 ## **Introduction to open-source simulator iverilog**
 __Simulator__
@@ -323,7 +330,9 @@ So, the guidance offfered to synthesizer is "constraints"
 
 ![WhatsApp Image 2023-09-02 at 18 27 58](https://github.com/pavithra7369/asic/assets/143084423/2d62b0ed-9192-4699-b355-4301ac24fe3d)
 
-## DAY2 Timing libs, hierarchical, flat synthesis, efficient flop coding styles
+ </details>
+<details>
+<summary>	DAY2 TIMING LIBS, HIERARCHIAL, FLAT SYNTHESIS, EFFICIENT FLOP CODING STYLES </summary>
 + Introduction to timing dot libs
 Command to extract .lib
 > gvim /path
@@ -575,7 +584,10 @@ these reset and set can either be synchronous or asynchronous
 
 ![WhatsApp Image 2023-09-03 at 08 38 12](https://github.com/pavithra7369/asic/assets/143084423/fc723b4b-71dd-46ed-a758-857b88e7f477)
 
-## Day3 Combinational and sequential optimizations
+
+</details>
+<details>
+<summary> Day 3: COMBINATIONAL AND SEQUENTIAL OPTIMIZATIONS </summary>
 
  **Introduction to logic optimizations**
  
@@ -853,7 +865,9 @@ synthesis after command flatten
 
 ![image](https://github.com/pavithra7369/asic/assets/143084423/e4e9bfe1-077b-425f-889c-7828a9aba519)
 
-## Day-4-GLS,blocking vs non-blocking and Synthesis-Simulation mismatch
+</details>
+<details> 
+	<summary> Day 4:GLS,BLOCKING VS NON-BLOCKING AND SYNTHESIS-SIMULATION MISMATCCH </summary>
 
 **GLS, Synthesis-Simulation mismatch and Blocking, Non-blocking statements**
 
@@ -1013,6 +1027,6 @@ In the below picture we can see that when a is low b is low the ouput is low,bec
 
 </details>
 <details>
-	WEEK3 <summary> </summary>
-</details>
-<details> DAY1<summary> </summary>
+	 <summary> WEEK3 DAY 1:Inceptioon ofopen-source EDDA,openLANE and Sky130PDK </summary>
+  
+

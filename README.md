@@ -1027,6 +1027,4 @@ In the below picture we can see that when a is low b is low the ouput is low,bec
 
 </details>
 <details>
-	 <summary> WEEK3 DAY 1:Inceptioon ofopen-source EDDA,openLANE and Sky130PDK </summary>
-  
-
+	

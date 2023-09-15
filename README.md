@@ -85,7 +85,9 @@ Execution: To execute the object file run the command spike pk p3.o
 
 ![image](https://github.com/pavithra7369/asic/assets/143084423/a296774b-3f68-4b6c-a2f0-a8cc4f064c02)
 
-
+</details>
+<details>
+<summary>	WEEK 2 DAY1  </summary>
 
 ## Installation
 > git clone https://github.com/YosysHQ/yosys.git
@@ -1009,4 +1011,8 @@ In the below picture we can see that when a is low b is low the ouput is low,bec
 
 ![WhatsApp Image 2023-09-03 at 14 40 35](https://github.com/pavithra7369/asic/assets/143084423/a514d93b-3abc-4049-981a-6c13adbc83a1)
 
-[Week 3](http://www.github.com)
+</details>
+<details>
+	WEEK3 <summary> </summary>
+</details>
+<details> DAY1<summary> </summary>

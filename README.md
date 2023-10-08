@@ -1009,13 +1009,13 @@ example1
     end
     endmodule
     
-simulation
+## simulation
 
  ![WhatsApp Image 2023-09-03 at 14 35 30](https://github.com/pavithra7369/asic/assets/143084423/f125c12f-0139-4ec6-b6e1-2690bd1c37c9)
    
 ![WhatsApp Image 2023-09-03 at 14 36 36](https://github.com/pavithra7369/asic/assets/143084423/53291e85-74ee-4d9e-aaa8-9892dadec4cc)
 
-synthesis
+## synthesis
 
 ![WhatsApp Image 2023-09-03 at 14 42 18](https://github.com/pavithra7369/asic/assets/143084423/cbf6ce59-dfd8-47a4-9cf3-32e634b90867)
 
